@@ -1,4 +1,6 @@
-/* Generated with ChatGPT */
+/*
+    Some parts of this css have been generated using ChatGPT
+*/
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
@@ -14,7 +16,6 @@ div {
     box-sizing: border-box;
 }
 
-/* Titolo */
 .div-title {
     text-align: center;
     margin-bottom: 30px;
@@ -27,7 +28,6 @@ div {
     letter-spacing: 1px;
 }
 
-/* Container delle immagini */
 .div-images {
     display: flex;
     justify-content: center;
@@ -47,13 +47,13 @@ div {
     margin: 0;
 }
 
-/* Ciascuna immagine nella griglia */
+
 .div-ul-li-images {
     position: relative;
 }
 
 .div-ul-li-images img {
-    width: 160px;  /* Dimensione uniforme per tutte le immagini */
+    width: 160px;  
     height: 160px;
     border-radius: 8px;
     border: 2px solid #cccccc;
@@ -62,19 +62,18 @@ div {
     object-fit: cover;
 }
 
-/* Effetto hover sulle immagini */
+
 .div-ul-li-images img:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-/* Effetto immagine cliccata */
+
 .div-ul-li-images img:active {
     transform: scale(1.03);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Sezione di reset */
 .div-reset {
     text-align: center;
     margin-top: 40px;
@@ -91,7 +90,6 @@ div {
     font-weight: 400;
 }
 
-/* Pulsante di reset */
 .div-reset-button {
     background-color: #333333;
     color: #ffffff;
@@ -112,26 +110,4 @@ div {
 .div-reset-button:active {
     transform: translateY(0);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Media queries per schermi piccoli */
-@media (max-width: 768px) {
-    .div-ul-images {
-        grid-template-columns: repeat(2, 140px);
-        gap: 10px;
-    }
-
-    .div-ul-li-images img {
-        width: 140px;
-        height: 140px;
-    }
-
-    .div-reset-h2 {
-        font-size: 1.2rem;
-    }
-
-    .div-reset-button {
-        padding: 10px 18px;
-        font-size: 0.9rem;
-    }
 }
