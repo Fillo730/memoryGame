@@ -1,2 +1,1 @@
-Simple memoryGame got at the following URL: 
-  https://reactpractice.dev/
+Simple memory game where you can have some fun :D
