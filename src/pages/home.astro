@@ -1,0 +1,43 @@
+---
+//Layouts
+import HtmlLayout from "../layouts/HtmlLayout/HtmlLayout.astro";
+import PagesLayout from "../layouts/PagesLayout/PagesLayout.astro";
+
+//Components
+import NatureGallery from "../home/natureGallery/NatureGallery.astro";
+import { HomeCustomButton } from "../components/ComponentsDependencies";
+
+//CSSFiles
+import "../styles/home.css";
+---
+
+<HtmlLayout title="Home | Memory Game">
+  <PagesLayout>
+    <div class="diplay-vertical">
+      <h1 class="title light-color">What's this memory game?</h1>
+      <div class="display-horizontal normal-max-width">
+        <p class="text custom-max-width">
+          A simple and effetive web site which allows you to train your brain and mind, and track your statistics and 
+          performance over time. The game is simple: you have to find the pairs of cards with the same image.<br/>Good luck and have fun!</p>
+        </p>
+        <HomeCustomButton text="Play Now" client:load/>
+      </div>
+
+      <h1 class="title light-color">Why images about Nature?</h1>
+      <p class="text normal-max-width">
+        The images used in this game are all related to nature. This is because nature is a great source of inspiration and beauty, 
+        and it can help to create a relaxing and enjoyable atmosphere while playing the game. Additionally, nature images are often 
+        visually appealing and can help to improve memory retention.
+      </p>
+      <NatureGallery/>
+
+      <h1 class="title light-color">Where are these images from?</h1>
+      <p class="text normal-max-width">
+        The images used in this game are from Unsplash, a website that provides high-quality, royalty-free images. 
+        You can find more information about the images and their authors on the Unsplash website.
+      </p>
+
+
+    </div>
+  </PagesLayout>
+</HtmlLayout>

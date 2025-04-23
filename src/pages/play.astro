@@ -1,0 +1,12 @@
+---
+//Layouts components
+import HtmlLayout from "../layouts/HtmlLayout/HtmlLayout.astro";
+import PagesLayout from "../layouts/PagesLayout/PagesLayout.astro";
+import GameHandler from '../play/gameHandler/GameHandler';
+---
+
+<HtmlLayout title="Play | Memory Game">
+    <PagesLayout>
+        <GameHandler client:load/>
+    </PagesLayout>
+</HtmlLayout>

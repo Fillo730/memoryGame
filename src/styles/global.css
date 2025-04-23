@@ -1,0 +1,38 @@
+.light-color {
+    color: #00bcd4;
+}
+
+.title {
+    font-size: 3rem;
+    letter-spacing: 1px;
+    margin: 1rem 0rem;
+}
+
+.text {
+    font-size: 1.2rem;
+    color: #cccccc;
+    line-height: 1.8;
+}
+
+.normal-max-width {
+    max-width: 1200px;
+}
+
+.custom-max-width {
+    max-width: 950px;
+}
+
+.diplay-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.display-horizontal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}

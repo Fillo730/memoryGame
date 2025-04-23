@@ -1,0 +1,14 @@
+.footer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.button-wrapper {
+    width: 140px;
+    display: flex;
+    justify-content: flex-start; 
+}

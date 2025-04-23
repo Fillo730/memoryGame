@@ -1,0 +1,29 @@
+const defaultImages = [
+  "./images/river.jpg",
+  "./images/bee.jpg",
+  "./images/forest.jpg",
+  "./images/rocks.jpg",
+  "./images/monkey.jpg",
+  "./images/rose.jpg",
+  "./images/whale.jpg",
+  "./images/cactus.jpg",
+  "./images/polarBear.jpg",
+  "./images/tree.jpg",
+  "./images/desert.jpg",
+  "./images/tiger.jpg",
+  "./images/ocean.jpg",
+  "./images/horse.jpg",
+  "./images/mountain.jpg",
+  "./images/giraffe.jpg",
+  "./images/grass.jpg",
+  "./images/lion.jpg",
+  "./images/waterfall.jpg",
+  "./images/dog.jpg",
+  "./images/shark.jpg",
+  "./images/sky.jpg",
+  "./images/elephant.jpg",
+  "./images/crocodile.jpg",
+  "./images/bird.jpg"
+];
+
+export default defaultImages;
