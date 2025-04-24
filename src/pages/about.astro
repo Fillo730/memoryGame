@@ -3,17 +3,33 @@
 import HtmlLayout from "../layouts/HtmlLayout/HtmlLayout.astro";
 import PagesLayout from "../layouts/PagesLayout/PagesLayout.astro";
 
-
+//Components
+import { LinkedinButton, GitHubButton } from "../components/ComponentsDependencies";
 ---
 
 <HtmlLayout title="About | Memory Game">
     <PagesLayout>
-        <h1 class="title light-color">Who am I?</h1>
-        <p class="text">
-            Hi, I'm a software engineer with a passion for web development and game design. I created this memory game as a 
-            fun project to improve my skills and provide an enjoyable experience for users. I hope you enjoy playing it as much as I 
-            enjoyed creating it!
-        </p>
+        <div class="display-vertical">
+            <h1 class="title light-color">Who am I?</h1>
+            <p class="text normal-max-width">
+                Hi, I'm a software engineer with a passion for web development and game design. I created this memory game as a 
+                fun project to improve my skills and provide an enjoyable experience for users. I hope you enjoy playing it as much as I 
+                enjoyed creating it!
+            </p>
 
+            <h1 class="title light-color">Follow each other</h1>
+            <p class="text normal-max-width">
+                I would love to connect with you and hear your feedback on the game!
+            </p>
+            <LinkedinButton client:load/>
+
+            <h1 class="title light-color">Source Code</h1>
+            <p class="text normal-max-width">
+                If you're interested in the source code of this game, you can find it on my GitHub repository. Feel free to check it out, 
+                contribute, or use it as a reference for your own projects.
+            </p>
+            <GitHubButton client:load/>
+
+        </div>
     </PagesLayout>
 </HtmlLayout>

@@ -22,7 +22,7 @@
     max-width: 950px;
 }
 
-.diplay-vertical {
+.display-vertical {
     display: flex;
     flex-direction: column;
     align-items: center;
