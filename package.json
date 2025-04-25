@@ -13,7 +13,13 @@
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "astro": "^5.7.3",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.503.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0"
   }

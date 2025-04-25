@@ -1,0 +1,11 @@
+---
+//Layouts
+import HtmlLayout from "../layouts/HtmlLayout/HtmlLayout.astro";
+
+//Components
+import LoginHandler from "../authForms/LoginHandler";
+---
+
+<HtmlLayout title="Login | Memory Game">
+    <LoginHandler client:load/>
+</HtmlLayout>
