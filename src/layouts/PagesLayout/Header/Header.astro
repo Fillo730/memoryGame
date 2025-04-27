@@ -1,4 +1,7 @@
 ---
+//Compoenents
+import { ProfileButton } from '../../../components/ComponentsDependencies';
+
 //CSSFiles
 import './Header.css';
 ---
@@ -11,6 +14,7 @@ import './Header.css';
             <li class="header-list-element"><a class="header-list-element-link" href="/about">About</a></li>
         </nav>
     </ul>
+    <ProfileButton client:only="react"/>
     <div class="header-button-container">
         <a href="/login"><button class="header-button">Login</button></a>
         <a href="/sign-up"><button class="header-button">Sign up</button></a>

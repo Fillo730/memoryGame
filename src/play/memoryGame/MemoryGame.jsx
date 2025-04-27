@@ -8,7 +8,7 @@ import defaultImages from "../../../public/DefaultImages";
 import placeholder from "../../../public/Placeholder";
 
 //CSSFiles
-import './memoryGame.css';
+import './MemoryGame.css';
 
 function MemoryGame({cards, handleGoBack}) {
     const numPairs = Math.floor(cards / 2);

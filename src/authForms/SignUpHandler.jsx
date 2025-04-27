@@ -1,6 +1,6 @@
 //Libraries
 import { useState } from 'react';
-import { User, Lock, Mail, BadgePlus, UserPlus } from 'lucide-react';
+import { User, Lock, BadgePlus, UserPlus } from 'lucide-react';
 
 //CSSFiles
 import './AuthForm.css';

@@ -9,15 +9,15 @@ app.use(express.json());
 
 const SECRET_KEY = 'supersegreto123';
 const users = [
-  { username: 'admin', password: bcrypt.hashSync('admin', 10) },
+  { username: 'admin', firstName: '', lastName: '', password: bcrypt.hashSync('admin', 10) },
 ]; 
 
 app.post('/api/register', async (req, res) => {
-  const { username, firstName, lastName, password } = req.body;
+  const { username, firstName, lastName, password }  = req.body;
   console.log("Registration attempt // username:", username, "FirstName: ",firstName," Lastname:",lastName,"password:", password);
 
   const userExists = users.find(u => u.username === username);
-  if (userExists) return res.status(400).json({ error: 'Utente già esistente' });
+  if (userExists) return res.status(400).json({ error: 'User already exists' });
 
   const hashedPassword = await bcrypt.hash(password, 10);
   users.push({ username, password: hashedPassword });
