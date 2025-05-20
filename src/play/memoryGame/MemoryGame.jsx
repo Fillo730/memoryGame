@@ -10,7 +10,7 @@ import placeholder from "../../../public/Placeholder";
 //CSSFiles
 import './MemoryGame.css';
 
-function MemoryGame({cards, handleGoBack}) {
+function MemoryGame({cards, level, handleGoBack}) {
     const numPairs = Math.floor(cards / 2);
     const selectedImagesPool = _.sampleSize(defaultImages, numPairs);
     const initialShuffled = _.shuffle([...selectedImagesPool, ...selectedImagesPool]);
@@ -22,13 +22,7 @@ function MemoryGame({cards, handleGoBack}) {
     const [moves, setMoves] = useState(0);
 
     useEffect(() => {
-        const selectedImagesPool = _.sampleSize(defaultImages, numPairs);
-        const newShuffled = _.shuffle([...selectedImagesPool, ...selectedImagesPool]);
-        setShuffledImages(newShuffled);
-        setPlaceHolderArray(new Array(cards).fill(placeholder));
-        setSelectedImages([]);
-        setMatchedPairs([]);
-        setMoves(0);
+        resetGame();
     }, [cards]);
 
     function handleImageClick(index) {
@@ -71,6 +65,26 @@ function MemoryGame({cards, handleGoBack}) {
     }
 
     const allImagesMatched = matchedPairs.length === shuffledImages.length;
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (allImagesMatched) {
+            fetch('http://localhost:3001/api/play', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+        body: JSON.stringify({ difficulty: `level${level}` }) 
+        })
+        .then(res => res.json())
+        .then(data => console.log('Game recorded:', data))
+        .catch(err => console.error(err));
+    }
+    }, [allImagesMatched]);
+
+
+    console.log(cards); 
 
     return (
         <div className="memory-game-container">

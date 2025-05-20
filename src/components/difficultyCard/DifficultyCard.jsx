@@ -1,14 +1,14 @@
 //CSSFiles
 import './DifficultyCard.css';
 
-function DifficultyCard({difficulty, text, cards, handleClick}) {
+function DifficultyCard({difficulty, handleClick}) {
   return (
-    <div className="card" onClick={() => handleClick(cards, difficulty)}>
+    <div className="card" onClick={() => handleClick(difficulty)}>
         <div className="first-content">
-            <span>{difficulty}</span>
+            <span>{difficulty.name}</span>
         </div>
         <div className="second-content">
-            <span>{text}</span>
+            <span>{difficulty.text}</span>
         </div>
     </div>
   )

@@ -1,0 +1,14 @@
+---
+//Layouts
+import HtmlLayout from "../layouts/HtmlLayout/HtmlLayout.astro";
+import PagesLayout from "../layouts/PagesLayout/PagesLayout.astro";
+
+//Components
+import UserProfile from "../profile/UserProfile";
+---
+
+<HtmlLayout title="Profile | Astro">
+    <PagesLayout>
+        <UserProfile client:only="react"/>
+    </PagesLayout>    
+</HtmlLayout>
