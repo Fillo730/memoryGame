@@ -5,6 +5,9 @@ import { User, Lock, BadgePlus, UserPlus } from 'lucide-react';
 //Functions
 import { checkPassword, checkUsername, checkName} from '../utils/checkPasswordUsername';
 
+//Constants
+import BACKEND_URL from '../utils/backendEndpoint';
+
 //CSSFiles
 import './AuthForm.css';
 
@@ -26,20 +29,20 @@ function SignUpHandler() {
   const register = async (e) => {
     e.preventDefault();
 
-    const usernameCheck = checkUsername(username);
+    const usernameCheck = checkUsername(form.username);
     if(!usernameCheck.valid) {
       setError(usernameCheck.message);
       return;
     }
 
-    const firstNameCheck = checkName(firstName);
-    const lastNameCheck = checkName(lastName);
+    const firstNameCheck = checkName(form.firstName);
+    const lastNameCheck = checkName(form.lastName);
     if(!firstNameCheck.valid || !lastNameCheck.valid) {
       setError(firstNameCheck.message || lastNameCheck.message);
       return;
     }
 
-    const passwordCheck = checkPassword(password);
+    const passwordCheck = checkPassword(form.password);
     if(!passwordCheck.valid) {
       setError(passwordCheck.message);
       return;
@@ -50,7 +53,7 @@ function SignUpHandler() {
       return;
     }
 
-    const res = await fetch('http://localhost:3001/api/register', {
+    const res = await fetch(`${BACKEND_URL}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),

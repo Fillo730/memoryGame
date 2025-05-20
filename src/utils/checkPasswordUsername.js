@@ -1,8 +1,8 @@
 const PASSWORD_LIMITS = {
   minLength: 8,
   maxLength: 99,
-  minNumbers: 1,
-  minSpecialCharacters: 1,
+  minNumbers: 0,
+  minSpecialCharacters: 0,
 };
 
 const USERNAME_LIMITS = {
@@ -59,13 +59,13 @@ function checkPassword(password) {
 
 function checkUsername(username) {
   const regex = new RegExp(
-    `^[a-zA-Z0-9_-]{${USERNAME_LIMITS.minLength},${USERNAME_LIMITS.maxLength}}$`
+    `^[a-zA-Z0-9_]{${USERNAME_LIMITS.minLength},${USERNAME_LIMITS.maxLength}}$`
   );
 
   if (!regex.test(username)) {
     return {
       valid: false,
-      message: `Username must be ${USERNAME_LIMITS.minLength}-${USERNAME_LIMITS.maxLength} characters and can only contain letters, numbers, underscores, or hyphens.`,
+      message: `Username must be ${USERNAME_LIMITS.minLength}-${USERNAME_LIMITS.maxLength} characters and can only contain letters, numbers, underscores.`,
     };
   }
 
@@ -74,7 +74,7 @@ function checkUsername(username) {
 
 function checkName(name) {
   const regex = new RegExp(
-    `^[a-zA-Z0-9_-]{${NAME_LIMITS.minLength},${NAME_LIMITS.maxLength}}$`
+    `^[a-zA-Z0-9]{${NAME_LIMITS.minLength},${NAME_LIMITS.maxLength}}$`
   );
 
   if(!regex.test(name)) {

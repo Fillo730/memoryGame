@@ -7,6 +7,9 @@ import { CustomButton } from "../../components/ComponentsDependencies";
 import defaultImages from "../../../public/DefaultImages";
 import placeholder from "../../../public/Placeholder";
 
+//Constants
+import BACKEND_URL from "../../utils/backendEndpoint";
+
 //CSSFiles
 import './MemoryGame.css';
 
@@ -69,7 +72,7 @@ function MemoryGame({cards, level, handleGoBack}) {
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (allImagesMatched) {
-            fetch('http://localhost:3001/api/play', {
+            fetch(`${BACKEND_URL}/play`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

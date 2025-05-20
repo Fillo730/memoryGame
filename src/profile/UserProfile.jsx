@@ -2,6 +2,9 @@
 import getUsername from "../utils/getUsername";
 import { useEffect, useState } from "react";
 
+//Constants
+import BACKEND_URL from "../utils/backendEndpoint";
+
 function UserProfile() {
   const username = getUsername();
   const [gamesPlayed, setGamesPlayed] = useState(null);
@@ -10,7 +13,7 @@ function UserProfile() {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3001/api/stats', {
+        const response = await fetch(`${BACKEND_URL}/stats`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
