@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import { User, Lock, BadgePlus, UserPlus } from 'lucide-react';
 
+//Functions
+import { checkPassword, checkUsername, checkName} from '../utils/checkPasswordUsername';
+
 //CSSFiles
 import './AuthForm.css';
 
@@ -22,6 +25,25 @@ function SignUpHandler() {
 
   const register = async (e) => {
     e.preventDefault();
+
+    const usernameCheck = checkUsername(username);
+    if(!usernameCheck.valid) {
+      setError(usernameCheck.message);
+      return;
+    }
+
+    const firstNameCheck = checkName(firstName);
+    const lastNameCheck = checkName(lastName);
+    if(!firstNameCheck.valid || !lastNameCheck.valid) {
+      setError(firstNameCheck.message || lastNameCheck.message);
+      return;
+    }
+
+    const passwordCheck = checkPassword(password);
+    if(!passwordCheck.valid) {
+      setError(passwordCheck.message);
+      return;
+    }
 
     if (form.password !== form.confirmPassword) {
       setError('Passwords do not match');

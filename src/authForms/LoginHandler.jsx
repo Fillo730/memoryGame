@@ -2,6 +2,9 @@
 import { useState } from 'react';
 import { User, Lock } from 'lucide-react';
 
+//Functions
+import { checkPassword, checkUsername } from '../utils/checkPasswordUsername';
+
 //CSSFiles
 import './AuthForm.css';
 
@@ -12,6 +15,18 @@ function LoginHandler() {
 
   const login = async (e) => {
     e.preventDefault();
+
+    const usernameCheck = checkUsername(username);
+    if(!usernameCheck.valid) {
+      setError(usernameCheck.message);
+      return;
+    }
+
+    const passwordCheck = checkPassword(password);
+    if(!passwordCheck.valid) {
+      setError(passwordCheck.message);
+      return;
+    }
 
     const res = await fetch('http://localhost:3001/api/login', {
       method: 'POST',
@@ -68,7 +83,6 @@ function LoginHandler() {
               />
             </div>
           </div>
-
           <button type="submit" className="primary-button">Login</button>
         </form>
 
