@@ -12,7 +12,7 @@ function profileDifficultyCard({ frontTitle, frontText, backTitle, backText }) {
             </div>
             <div className="flip-card-back">
                 <p className="title-card">{backTitle}</p>
-                <p>{backText}</p>
+                <p dangerouslySetInnerHTML={{ __html: backText }}></p>
             </div>
          </div>
         </div>

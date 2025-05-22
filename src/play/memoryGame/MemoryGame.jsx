@@ -78,7 +78,7 @@ function MemoryGame({cards, name, handleGoBack}) {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-        body: JSON.stringify({ difficulty: name}) 
+        body: JSON.stringify({ difficulty: name, moves: moves }) 
         })
         .then(res => res.json())
         .then(data => console.log('Game recorded:', data))

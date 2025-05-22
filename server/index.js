@@ -1,3 +1,4 @@
+//Libraries
 import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
@@ -11,42 +12,24 @@ const SECRET_KEY = 'supersecret123';
 
 // Users array (It must be replaced with a database in production)
 const users = [
-  { 
-    username: 'admin', 
-    firstName: '', 
-    lastName: '', 
-    password: bcrypt.hashSync('admin', 10),
-    gamesPlayed: {
-      Easy: 0,
-      Medium: 0,
-      Hard: 0,
-      Extreme: 0,
-      Impossible: 0,
-      Legendary: 0,
-      Mythical: 0,
-      Divine: 0,
-      Godlike: 0
-    }
-  },
   {
     username: 'r', 
     firstName: 'r', 
     lastName: 'r', 
     password: bcrypt.hashSync('r', 10),
-    gamesPlayed: {
-      Easy: 0,
-      Medium: 0,
-      Hard: 0,
-      Extreme: 0,
-      Impossible: 0,
-      Legendary: 0,
-      Mythical: 0,
-      Divine: 0,
-      Godlike: 0
+    gamesCompleted: {
+      Easy:      { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Medium:    { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Hard:      { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Extreme:   { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Impossible:{ completed: 0, totalAttempts: 0, bestScore: NaN },
+      Legendary: { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Mythical:  { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Divine:    { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Godlike:   { completed: 0, totalAttempts: 0, bestScore: NaN }
     }
   }
 ];
-
 
 // Register
 app.post('/api/register', async (req, res) => {
@@ -62,17 +45,7 @@ app.post('/api/register', async (req, res) => {
     firstName,
     lastName,
     password: hashedPassword,
-    gamesPlayed: {
-      Easy: 0,
-      Medium: 0,
-      Hard: 0,
-      Extreme: 0,
-      Impossible: 0,
-      Legendary: 0,
-      Mythical: 0,
-      Divine: 0,
-      Godlike: 0
-    }
+    gamesCompleted: JSON.parse(JSON.stringify(initialGamesCompleted))
   });
   res.json({ message: 'Registration completed' });
 });
@@ -118,14 +91,16 @@ app.post('/api/play', (req, res) => {
     const user = users.find(u => u.username === decoded.username);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    const { difficulty } = req.body;
-    console.log("Game played attempt // username:", decoded.username, "Difficulty:", difficulty);
-    if (!user.gamesPlayed.hasOwnProperty(difficulty)) {
+    const { difficulty, moves} = req.body;
+    console.log("Game played attempt // username:", decoded.username, "Difficulty:", difficulty, "Moves:", moves);
+    if (!user.gamesCompleted.hasOwnProperty(difficulty)) {
       return res.status(400).json({ error: 'Invalid difficulty level' });
     }
 
-    user.gamesPlayed[difficulty]++;
-    res.json({ message: `Game recorded for ${difficulty}`, gamesPlayed: user.gamesPlayed });
+    user.gamesCompleted[difficulty].completed += 1;
+    user.gamesCompleted[difficulty].totalAttempts += moves;
+    user.gamesCompleted[difficulty].bestScore = Math.min(user.gamesCompleted[difficulty].bestScore || moves, moves);
+    res.json({ message: `Game recorded for ${difficulty}`, gamesCompleted: user.gamesCompleted });
   } catch {
     res.status(401).json({ error: 'Invalid token' });
   }
@@ -146,7 +121,7 @@ app.get('/api/stats', (req, res) => {
       username: user.username,
       firstName: user.firstName,
       lastName: user.lastName,
-      gamesPlayed: user.gamesPlayed
+      gamesCompleted: user.gamesCompleted
     });
   } catch {
     res.status(401).json({ error: 'Invalid token' });

@@ -55,16 +55,21 @@ function UserProfile() {
           </p>
           <h1 className="medium-title light-color">Games Played</h1>
           <div className="difficulty-container">
-            {difficulties.map((difficulty, index) => (
-              <ProfileDifficultyCard 
-                key={index} 
-                frontTitle={difficulty.name} 
-                frontText={`Games Played: ${userInformation.gamesPlayed[difficulty.name]}`} 
-                backTitle="More Info" 
-                backText={`Average Time: 2 seconds`}
-              />  
-            ))}
-            </div>
+          {difficulties.map((difficulty, index) => {
+            const stats = userInformation.gamesCompleted[difficulty.name];
+              return (
+                <ProfileDifficultyCard 
+                  key={index} 
+                  frontTitle={difficulty.name} 
+                  frontText={`Games Played: ${stats.completed}`} 
+                  backTitle="More Info" 
+                  backText={`Average attempts: ${stats.completed === 0 ? 0 : (stats.totalAttempts / stats.completed).toFixed(2)}
+                  <br/>Best score: ${stats.bestScore || 0}`} 
+                />
+              );
+            })}
+          </div>
+
         </div>
       ) : (
         <div className="normal-max-width">
