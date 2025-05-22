@@ -1,48 +1,32 @@
-# Astro Starter Kit: Basics
+🌿 Memory Game
+Memory Game is a browser-based card-matching game inspired by the calming beauty of the natural world. This project is built using modern web technologies including React and Astro for the front-end and Express (Node.js) for the back-end.
+Players are presented with a grid of cards featuring real nature images (e.g., landscapes, animals, forests, etc.) and must find matching pairs to complete the game.
 
-```sh
-npm create astro@latest -- --template basics
-```
+🎯 Features
+🖼️ Beautiful Nature Imagery – Cards feature high-quality, royalty-free nature images.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+⚛️ Modern Front-End – Built with React components inside Astro, ensuring fast, optimized rendering.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+🔄 State Management – Smooth flip animations and score tracking using React state.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+🔧 Backend API – Basic game logic routes implemented with Express.js (Node.js).
 
-## 🚀 Project Structure
+🧪 Modular Architecture – Cleanly separated front-end and back-end for scalability.
 
-Inside of your Astro project, you'll see the following folders and files:
+🌐 Deployment
+🚀 Front-End Hosted on Vercel
+The front-end is fully deployed and accessible via Vercel, providing fast global delivery and seamless CI/CD integration.
+https://memory-game-pi-self.vercel.app/home
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+🛠️ Back-End Hosted on Render (Free Tier)
+The Express-based API is hosted on Render.
+Note: Due to the limitations of the free plan, the server may take a few seconds to "wake up" or may occasionally be temporarily unavailable.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+🛠 Tech Stack
+Layer	Technology
+Front-End	React, Astro
+Styling	CSS 
+Back-End	Node.js, Express
+Hosting (FE)	Vercel
+Hosting (BE)	Render (free tier)
+Database	Not yet implemented
