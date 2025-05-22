@@ -39,14 +39,16 @@ function UserProfile() {
 
   return (
     <div className="display-vertical">
-      <h1 className="title light-color">Hello {username.toUpperCase()}</h1>
-      <div className="normal-max-width">
-        <p className="text custom-max-width">
-          This is your profile page. Here you can see all the information about your profile and all the games you have played, with 
-          relative difficulty level.
-        </p>
+      
+      <div className="display-center-vertical-nogap">
+        <h1 className="title light-color">Hello {username.toUpperCase()}</h1>
+        <div className="normal-max-width">
+          <p className="text custom-max-width">
+            This is your profile page. Here you can see all the information about your profile and all the games you have played, with 
+            relative difficulty level.
+          </p>
+        </div>
       </div>
-
       {userInformation ? (
         <div className="normal-max-width display-vertical">
           <p className="text custom-max-width">

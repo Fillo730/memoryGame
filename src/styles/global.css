@@ -9,7 +9,7 @@
 .title {
     font-size: 3rem;
     letter-spacing: 1px;
-    margin: 1rem 0rem;
+    margin: 0.5rem 0rem;
 }
 
 .medium-title {
@@ -43,6 +43,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
 }
 
 .display-horizontal {
@@ -51,6 +52,13 @@
     align-items: center;
     justify-content: center;
     gap: 3rem;
+}
+
+.display-center-vertical-nogap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .difficulty-container {
