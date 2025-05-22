@@ -21,8 +21,18 @@
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease;
+}
+
+.memory-card-dimension {
   width: 320px;
   height: 200px;
+}
+
+@media (max-width: 768px) {
+  .memory-card-dimension {
+    width: 150px;
+    height: 100px;
+  }
 }
 
 .memory-card:hover {

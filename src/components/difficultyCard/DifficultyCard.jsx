@@ -3,7 +3,7 @@ import './DifficultyCard.css';
 
 function DifficultyCard({difficulty, handleClick=null}) {
   return (
-    <div className="card" onClick={() => handleClick(difficulty)}>
+    <div className="card card-dimension" onClick={() => handleClick(difficulty)}>
         <div className="first-content">
             <span>{difficulty.name}</span>
         </div>

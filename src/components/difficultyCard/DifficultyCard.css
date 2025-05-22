@@ -1,17 +1,28 @@
 .card {
-    width: 190px;
-    height: 254px;
     background: #00bcd4;
     transition: all 0.4s ease;
     border-radius: 10px;
     box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.4);
-    font-size: 1.5rem;
     font-weight: 900;
     color: #ffffff;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.card-dimension {
+    width: 190px;
+    height: 254px;
+    font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .card-dimension {
+        width: 100px;
+        height: 130px;
+        font-size: 1.1rem;
+    }
 }
 
 .card:hover {

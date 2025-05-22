@@ -95,7 +95,7 @@ function MemoryGame({cards, name, handleGoBack}) {
         <div className="memory-game-container">
             <ul className="memory-grid">
                 {placeholderArray.map((image, index) => (
-                    <li key={index} className="memory-card" onClick={() => handleImageClick(index)}>
+                    <li key={index} className="memory-card memory-card-dimension" onClick={() => handleImageClick(index)}>
                         <img src={image} alt="memory" />
                     </li>
                 ))}
