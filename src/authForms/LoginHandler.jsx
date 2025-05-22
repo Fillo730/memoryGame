@@ -1,6 +1,6 @@
 //Libraries
 import { useState } from 'react';
-import { User, Lock } from 'lucide-react';
+import { User, Lock, Loader} from 'lucide-react';
 
 //Constants
 import BACKEND_URL from '../utils/backendEndpoint';
@@ -11,6 +11,7 @@ import './AuthForm.css';
 function LoginHandler() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const login = async (e) => {
@@ -21,6 +22,7 @@ function LoginHandler() {
       return; 
     }
 
+    setIsLoading(true);
     const res = await fetch(`${BACKEND_URL}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,6 +30,8 @@ function LoginHandler() {
     });
 
     const data = await res.json();
+
+    setIsLoading(false);
 
     if (res.ok) {
       window.location.href = '/home';
@@ -76,7 +80,9 @@ function LoginHandler() {
               />
             </div>
           </div>
-          <button type="submit" className="primary-button">Login</button>
+          <button type="submit" className="primary-button" disabled={isLoading}>
+            {isLoading ? <Loader/> : 'Login'}
+          </button>
         </form>
 
         <div className="auth-actions">

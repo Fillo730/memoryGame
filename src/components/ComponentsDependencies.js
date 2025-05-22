@@ -7,4 +7,5 @@ import GitHubButton from "./gitHubButtom/GitHubButton";
 import ProfileButton from "./profileButton/ProfileButton";
 import ProfileDifficultyCard from "./profileDifficultyCard/profileDifficultyCard";
 
-export { ProfileButton, GitHubButton, LinkedinButton, HomeCustomButton, CustomButton, BackToTopButton, DifficultyCard, ProfileDifficultyCard };
+export { ProfileButton, GitHubButton, LinkedinButton, HomeCustomButton, CustomButton, BackToTopButton, 
+    DifficultyCard, ProfileDifficultyCard };

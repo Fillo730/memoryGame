@@ -1,10 +1,12 @@
+//Libraries
+import { useEffect, useState } from "react";
+
 //Components
-import { ProfileDifficultyCard } from "../components/ComponentsDependencies";
+import { CustomButton, ProfileDifficultyCard } from "../components/ComponentsDependencies";
 
 // Utils
-import getUsername from "../utils/getUsername";
+import { getUsername, handleLogout } from "../utils/loginFunctions";
 import difficulties from "../utils/difficulties";
-import { useEffect, useState } from "react";
 
 //Constants
 import BACKEND_URL from "../utils/backendEndpoint";
@@ -27,7 +29,6 @@ function UserProfile() {
         }
         const data = await response.json();
         setUserInformation(data);
-        console.log(data);
       } catch (error) {
         console.error('Error fetching stats:', error);
       }
@@ -69,6 +70,7 @@ function UserProfile() {
               );
             })}
           </div>
+          <CustomButton text={"Logout"} handleClick={handleLogout} />
 
         </div>
       ) : (

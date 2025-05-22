@@ -1,6 +1,9 @@
 //Libraries
 import { useState } from 'react'
 
+//utils
+import { isLoggedIn } from '../../utils/loginFunctions';
+
 //Components
 import { DifficultyCard } from '../../components/ComponentsDependencies';
 import MemoryGame from '../memoryGame/MemoryGame';
@@ -10,6 +13,7 @@ import difficulties from '../../utils/difficulties';
 
 function GameHandler() {
   const [isDifficultySelected, setIsDifficultySelected] = useState(false);
+  const [loggedIn] = useState(isLoggedIn());
   const [difficulty, setDifficulty] = useState(null);
 
   function handleClick(selectedDifficulty) {
@@ -30,6 +34,12 @@ function GameHandler() {
           <p className="text">
               The more cards are present, the more difficult the game will be.<br/>
               So choose wisely!<br/>
+              {!loggedIn && 
+                <label className='warning-color'>
+                  <span>Note: </span>
+                  You are not logged in, so your progress will not be saved.
+                </label> 
+              }
           </p>
           <div className="difficulty-container">
             {difficulties.map((difficulty, index) => (

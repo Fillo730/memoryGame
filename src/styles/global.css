@@ -2,6 +2,10 @@
     color: #00bcd4;
 }
 
+.warning-color {
+    color: #ff9800;
+}
+
 .title {
     font-size: 3rem;
     letter-spacing: 1px;

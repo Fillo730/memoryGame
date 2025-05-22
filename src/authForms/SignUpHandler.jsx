@@ -1,6 +1,6 @@
 //Libraries
 import { useState } from 'react';
-import { User, Lock, BadgePlus, UserPlus } from 'lucide-react';
+import { User, Lock, BadgePlus, UserPlus, Loader} from 'lucide-react';
 
 //Functions
 import { checkPassword, checkUsername, checkName} from '../utils/checkPasswordUsername';
@@ -19,7 +19,7 @@ function SignUpHandler() {
     password: '',
     confirmPassword: '',
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -53,6 +53,8 @@ function SignUpHandler() {
       return;
     }
 
+    setIsLoading(true);
+
     const res = await fetch(`${BACKEND_URL}/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -60,6 +62,8 @@ function SignUpHandler() {
     });
 
     const data = await res.json();
+
+    setIsLoading(false);
 
     if (res.ok) {
       window.location.href = '/login';
@@ -152,7 +156,9 @@ function SignUpHandler() {
             </div>
           </div>
 
-          <button type="submit" className="primary-button">Sign up</button>
+          <button type="submit" className="primary-button" disabled={isLoading}>
+            {isLoading ? <Loader/> : 'Sign Up'}
+          </button>
         </form>
 
         <div className="auth-actions">

@@ -2,6 +2,9 @@
 import { useState, useEffect } from "react";
 import _ from 'lodash';
 
+//utils
+import { isLoggedIn } from "../../utils/loginFunctions";
+
 //Components
 import { CustomButton } from "../../components/ComponentsDependencies";
 import defaultImages from "../../../public/DefaultImages";
@@ -70,6 +73,9 @@ function MemoryGame({cards, name, handleGoBack}) {
     const allImagesMatched = matchedPairs.length === shuffledImages.length;
 
     useEffect(() => {
+        if(!isLoggedIn()) {
+            return;
+        }
         const token = localStorage.getItem('token');
         if (allImagesMatched) {
             fetch(`${BACKEND_URL}/play`, {

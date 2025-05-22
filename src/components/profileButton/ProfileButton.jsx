@@ -1,6 +1,6 @@
 //Functions
 import { useEffect, useState } from "react";
-import getUsername from "../../utils/getUsername";
+import { getUsername } from "../../utils/loginFunctions";
 
 // CSS Files
 import "./ProfileButton.css";
