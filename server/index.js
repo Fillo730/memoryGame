@@ -45,7 +45,17 @@ app.post('/api/register', async (req, res) => {
     firstName,
     lastName,
     password: hashedPassword,
-    gamesCompleted: JSON.parse(JSON.stringify(initialGamesCompleted))
+    gamesCompleted: {
+      Easy:      { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Medium:    { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Hard:      { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Extreme:   { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Impossible:{ completed: 0, totalAttempts: 0, bestScore: NaN },
+      Legendary: { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Mythical:  { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Divine:    { completed: 0, totalAttempts: 0, bestScore: NaN },
+      Godlike:   { completed: 0, totalAttempts: 0, bestScore: NaN }
+    }
   });
   res.json({ message: 'Registration completed' });
 });

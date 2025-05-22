@@ -81,13 +81,9 @@ function MemoryGame({cards, name, handleGoBack}) {
         body: JSON.stringify({ difficulty: name, moves: moves }) 
         })
         .then(res => res.json())
-        .then(data => console.log('Game recorded:', data))
         .catch(err => console.error(err));
     }
     }, [allImagesMatched]);
-
-
-    console.log(cards); 
 
     return (
         <div className="memory-game-container">
