@@ -19,8 +19,8 @@
 
 @media (max-width: 768px) {
     .card-dimension {
-        width: 100px;
-        height: 130px;
+        width: 120px;
+        height: 150px;
         font-size: 1.1rem;
     }
 }
@@ -66,4 +66,10 @@
     height: 100%;
     font-size: 1.8rem;
     transform: rotate(0deg);
+}
+
+@media (max-width: 768px) {
+    .card:hover .second-content {
+        font-size: 1.2rem;
+    }
 }
