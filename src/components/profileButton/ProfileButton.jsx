@@ -1,5 +1,7 @@
-//Functions
+//Libraries
 import { useEffect, useState } from "react";
+
+//utils
 import { getUsername } from "../../utils/loginFunctions";
 
 // CSS Files
