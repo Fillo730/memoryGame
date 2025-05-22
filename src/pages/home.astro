@@ -4,7 +4,7 @@ import HtmlLayout from "../layouts/HtmlLayout/HtmlLayout.astro";
 import PagesLayout from "../layouts/PagesLayout/PagesLayout.astro";
 
 //Components
-import NatureGallery from "../home/natureGallery/NatureGallery.astro";
+import NatureGallery from "../home/natureGallery/NatureGallery";
 import { HomeCustomButton } from "../components/ComponentsDependencies";
 
 //CSSFiles
@@ -29,7 +29,7 @@ import "../styles/home.css";
         and it can help to create a relaxing and enjoyable atmosphere while playing the game. Additionally, nature images are often 
         visually appealing and can help to improve memory retention.
       </p>
-      <NatureGallery/>
+      <NatureGallery client:only="react"/>
 
       <h1 class="title light-color">Where are these images from?</h1>
       <p class="text normal-max-width">
