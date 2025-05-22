@@ -8,9 +8,6 @@ import MemoryGame from '../memoryGame/MemoryGame';
 //Objects
 import difficulties from '../../utils/difficulties';
 
-//CSSFiles
-import './GameHandler.css'
-
 function GameHandler() {
   const [isDifficultySelected, setIsDifficultySelected] = useState(false);
   const [difficulty, setDifficulty] = useState(null);
@@ -54,7 +51,7 @@ function GameHandler() {
               <p className="text">
                 Match the cards and try to remember their positions!<br/>
               </p>
-              <MemoryGame cards={difficulty.cards} level={difficulty.level} handleGoBack={handleGoBack}/>
+              <MemoryGame cards={difficulty.cards} name={difficulty.name} handleGoBack={handleGoBack}/>
             </>
           )}
         </>

@@ -17,15 +17,15 @@ const users = [
     lastName: '', 
     password: bcrypt.hashSync('admin', 10),
     gamesPlayed: {
-      level1: 0,
-      level2: 0,
-      level3: 0,
-      level4: 0,
-      level5: 0,
-      level6: 0,
-      level7: 0,
-      level8: 0,
-      level9: 0,
+      Easy: 0,
+      Medium: 0,
+      Hard: 0,
+      Extreme: 0,
+      Impossible: 0,
+      Legendary: 0,
+      Mythical: 0,
+      Divine: 0,
+      Godlike: 0
     }
   },
   {
@@ -34,23 +34,24 @@ const users = [
     lastName: 'r', 
     password: bcrypt.hashSync('r', 10),
     gamesPlayed: {
-      level1: 0,
-      level2: 0,
-      level3: 0,
-      level4: 0,
-      level5: 0,
-      level6: 0,
-      level7: 0,
-      level8: 0,
-      level9: 0,
+      Easy: 0,
+      Medium: 0,
+      Hard: 0,
+      Extreme: 0,
+      Impossible: 0,
+      Legendary: 0,
+      Mythical: 0,
+      Divine: 0,
+      Godlike: 0
     }
   }
-]; 
+];
+
 
 // Register
 app.post('/api/register', async (req, res) => {
   const { username, firstName, lastName, password } = req.body;
-  console.log("Registration attempt // username:", username, "FirstName:", firstName, "LastName:", lastName, "Password:", password);
+  console.log("Registration attempt // username:", username, "FirstName:", firstName, "LastName:", lastName);
 
   const userExists = users.find(u => u.username === username);
   if (userExists) return res.status(400).json({ error: 'User already exists' });
@@ -62,15 +63,15 @@ app.post('/api/register', async (req, res) => {
     lastName,
     password: hashedPassword,
     gamesPlayed: {
-      level1: 0,
-      level2: 0,
-      level3: 0,
-      level4: 0,
-      level5: 0,
-      level6: 0,
-      level7: 0,
-      level8: 0,
-      level9: 0,
+      Easy: 0,
+      Medium: 0,
+      Hard: 0,
+      Extreme: 0,
+      Impossible: 0,
+      Legendary: 0,
+      Mythical: 0,
+      Divine: 0,
+      Godlike: 0
     }
   });
   res.json({ message: 'Registration completed' });
@@ -90,6 +91,7 @@ app.post('/api/login', async (req, res) => {
   const token = jwt.sign({ username }, SECRET_KEY, { expiresIn: '1h' });
   res.json({ token });
 });
+
 
 // Profile
 app.get('/api/profile', (req, res) => {
@@ -133,15 +135,19 @@ app.post('/api/play', (req, res) => {
 app.get('/api/stats', (req, res) => {
   const auth = req.headers.authorization;
   if (!auth) return res.status(401).json({ error: 'Missing token' });
-  console.log("Stats retrieving attempt");
-
+  
   try {
     const token = auth.split(' ')[1];
     const decoded = jwt.verify(token, SECRET_KEY);
     const user = users.find(u => u.username === decoded.username);
     if (!user) return res.status(404).json({ error: 'User not found' });
 
-    res.json({ gamesPlayed: user.gamesPlayed });
+    res.json({
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      gamesPlayed: user.gamesPlayed
+    });
   } catch {
     res.status(401).json({ error: 'Invalid token' });
   }

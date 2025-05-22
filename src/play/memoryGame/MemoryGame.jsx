@@ -13,7 +13,7 @@ import BACKEND_URL from "../../utils/backendEndpoint";
 //CSSFiles
 import './MemoryGame.css';
 
-function MemoryGame({cards, level, handleGoBack}) {
+function MemoryGame({cards, name, handleGoBack}) {
     const numPairs = Math.floor(cards / 2);
     const selectedImagesPool = _.sampleSize(defaultImages, numPairs);
     const initialShuffled = _.shuffle([...selectedImagesPool, ...selectedImagesPool]);
@@ -78,7 +78,7 @@ function MemoryGame({cards, level, handleGoBack}) {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-        body: JSON.stringify({ difficulty: `level${level}` }) 
+        body: JSON.stringify({ difficulty: name}) 
         })
         .then(res => res.json())
         .then(data => console.log('Game recorded:', data))

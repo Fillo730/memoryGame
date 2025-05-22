@@ -1,7 +1,7 @@
 //CSSFiles
 import './DifficultyCard.css';
 
-function DifficultyCard({difficulty, handleClick}) {
+function DifficultyCard({difficulty, handleClick=null}) {
   return (
     <div className="card" onClick={() => handleClick(difficulty)}>
         <div className="first-content">

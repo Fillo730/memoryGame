@@ -1,5 +1,9 @@
+//Components
+import { ProfileDifficultyCard } from "../components/ComponentsDependencies";
+
 // Utils
 import getUsername from "../utils/getUsername";
+import difficulties from "../utils/difficulties";
 import { useEffect, useState } from "react";
 
 //Constants
@@ -7,7 +11,7 @@ import BACKEND_URL from "../utils/backendEndpoint";
 
 function UserProfile() {
   const username = getUsername();
-  const [gamesPlayed, setGamesPlayed] = useState(null);
+  const [userInformation, setUserInformation] = useState(null);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -22,8 +26,8 @@ function UserProfile() {
           throw new Error('Failed to fetch stats');
         }
         const data = await response.json();
+        setUserInformation(data);
         console.log(data);
-        setGamesPlayed(data.gamesPlayed);
       } catch (error) {
         console.error('Error fetching stats:', error);
       }
@@ -35,26 +39,40 @@ function UserProfile() {
   return (
     <div className="display-vertical">
       <h1 className="title light-color">Hello {username.toUpperCase()}</h1>
-      <div className="display-horizontal normal-max-width">
+      <div className="normal-max-width">
         <p className="text custom-max-width">
-          This is your profile page. Here you can see all your statistics. You can also see how many games you have played and your best scores.
+          This is your profile page. Here you can see all the information about your profile and all the games you have played, with 
+          relative difficulty level.
         </p>
       </div>
 
-      {gamesPlayed ? (
-        <div className="stats">
-          <h2>Games Played:</h2>
-          <ul>
-            {Object.entries(gamesPlayed).map(([level, count]) => (
-              <li key={level}>
-                {level}: {count} games
-              </li>
+      {userInformation ? (
+        <div className="normal-max-width display-vertical">
+          <p className="text custom-max-width">
+            <label className="big-text light-color">Username: </label> {userInformation.username}<br/>
+            <label className="big-text light-color">Firstname: </label> {userInformation.firstName}<br/>
+            <label className="big-text light-color">Lastname: </label> {userInformation.lastName}<br/>
+          </p>
+          <h1 className="medium-title light-color">Games Played</h1>
+          <div className="difficulty-container">
+            {difficulties.map((difficulty, index) => (
+              <ProfileDifficultyCard 
+                key={index} 
+                frontTitle={difficulty.name} 
+                frontText={`Games Played: ${userInformation.gamesPlayed[difficulty.name]}`} 
+                backTitle="More Info" 
+                backText={`Average Time: 2 seconds`}
+              />  
             ))}
-          </ul>
+            </div>
         </div>
       ) : (
-        <p>Loading stats...</p>
+        <div className="normal-max-width">
+          Loading
+        </div>
       )}
+      
+      
     </div>
   );
 }

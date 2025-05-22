@@ -5,5 +5,6 @@ import HomeCustomButton from "./homeCustomButton/HomeCustomButton";
 import LinkedinButton from "./linkedinButton/LinkedinButton";
 import GitHubButton from "./gitHubButtom/GitHubButton";
 import ProfileButton from "./profileButton/ProfileButton";
+import ProfileDifficultyCard from "./profileDifficultyCard/profileDifficultyCard";
 
-export { ProfileButton, GitHubButton, LinkedinButton, HomeCustomButton, CustomButton, BackToTopButton, DifficultyCard };
+export { ProfileButton, GitHubButton, LinkedinButton, HomeCustomButton, CustomButton, BackToTopButton, DifficultyCard, ProfileDifficultyCard };
