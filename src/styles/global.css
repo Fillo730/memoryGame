@@ -80,6 +80,35 @@
         justify-content: center;
         gap: 1.5rem;
     }
+}
 
-    
+.input-field {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background-color: #1e1e1e;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.label-width {
+    width: 50%;
+}
+
+.form-modal {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.margin-top {
+    margin-top: 1rem;
+}
+
+.margin-bottom {
+    margin-bottom: 1rem;
 }

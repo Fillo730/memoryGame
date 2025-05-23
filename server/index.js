@@ -144,5 +144,45 @@ app.get('/api/stats', async (req, res) => {
   }
 });
 
+// Update user profile
+app.put('/api/update-profile', async (req, res) => {
+  const auth = req.headers.authorization;
+  if (!auth) {
+    console.warn('[UPDATE_PROFILE] Failed - Missing token');
+    return res.status(401).json({ error: 'Missing token' });
+  }
+
+  try {
+    const token = auth.split(' ')[1];
+    const decoded = jwt.verify(token, SECRET_KEY);
+    const { username, firstName, lastName } = req.body;
+
+    const user = await User.findOne({ username: decoded.username });
+    if (!user) {
+      console.warn(`[UPDATE_PROFILE] Failed - User '${decoded.username}' not found`);
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    user.username = username || user.username;
+    if (username) {
+      const existingUser = await User.findOne({ username });
+      if (existingUser && !existingUser._id.equals(user._id)) {
+        console.warn(`[UPDATE_PROFILE] Failed - Username '${username}' already taken`);
+         return res.status(400).json({ error: 'Username already taken' });
+      }
+    }
+
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    await user.save();
+    console.log(`[UPDATE_PROFILE] Success - Username: ${decoded.username}`);
+    const newToken = jwt.sign({ username: user.username }, SECRET_KEY, { expiresIn: '1h' });
+    res.json({ message: 'Profile updated successfully', user, token: newToken });
+  } catch (err) {
+    console.warn('[UPDATE_PROFILE] Failed - Invalid token');
+    return res.status(401).json({ error: 'Invalid token' });
+  }
+});
+
 // Start server
 app.listen(3001, () => console.log('[SERVER] Running at http://localhost:3001'));

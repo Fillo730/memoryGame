@@ -80,7 +80,7 @@ function checkName(name) {
   if(!regex.test(name)) {
     return {
       valid: false,
-      message: `Name must be ${NAME_LIMITS.minLength}-${NAME_LIMITS.maxLength} characters and can only contain letters.`,
+      message: `Names must be ${NAME_LIMITS.minLength}-${NAME_LIMITS.maxLength} characters and can only contain letters.`,
     };
   }
 
