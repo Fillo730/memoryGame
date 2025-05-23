@@ -1,77 +1,54 @@
-//Libraries
+// Libraries
 import express from 'express';
 import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+import './database/db.js';
+import User from './database/models/user.js';
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const SECRET_KEY = 'supersecret123';
-
-// Users array (It must be replaced with a database in production)
-const users = [
-  {
-    username: 'r', 
-    firstName: 'r', 
-    lastName: 'r', 
-    password: bcrypt.hashSync('r', 10),
-    gamesCompleted: {
-      Easy:      { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Medium:    { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Hard:      { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Extreme:   { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Impossible:{ completed: 0, totalAttempts: 0, bestScore: NaN },
-      Legendary: { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Mythical:  { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Divine:    { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Godlike:   { completed: 0, totalAttempts: 0, bestScore: NaN }
-    }
-  }
-];
+const SECRET_KEY = process.env.SECRET_KEY;
 
 // Register
 app.post('/api/register', async (req, res) => {
   const { username, firstName, lastName, password } = req.body;
   console.log(`[REGISTER] Attempt - Username: ${username}, FirstName: ${firstName}, LastName: ${lastName}`);
 
-  const userExists = users.find(u => u.username === username);
+  const userExists = await User.findOne({ username });
   if (userExists) {
     console.warn(`[REGISTER] Failed - Username '${username}' already exists`);
     return res.status(400).json({ error: 'User already exists' });
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
-  users.push({
+  const newUser = new User({
     username,
     firstName,
     lastName,
     password: hashedPassword,
     gamesCompleted: {
-      Easy:      { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Medium:    { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Hard:      { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Extreme:   { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Impossible:{ completed: 0, totalAttempts: 0, bestScore: NaN },
-      Legendary: { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Mythical:  { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Divine:    { completed: 0, totalAttempts: 0, bestScore: NaN },
-      Godlike:   { completed: 0, totalAttempts: 0, bestScore: NaN }
+      Easy: {}, Medium: {}, Hard: {}, Extreme: {}, Impossible: {},
+      Legendary: {}, Mythical: {}, Divine: {}, Godlike: {}
     }
   });
 
+  await newUser.save();
   console.log(`[REGISTER] Success - Username: ${username}`);
   res.json({ message: 'Registration completed' });
 });
-
 
 // Login
 app.post('/api/login', async (req, res) => {
   const { username, password } = req.body;
   console.log(`[LOGIN] Attempt - Username: ${username}`);
 
-  const user = users.find(u => u.username === username);
+  const user = await User.findOne({ username });
   if (!user) {
     console.warn(`[LOGIN] Failed - Username '${username}' not found`);
     return res.status(401).json({ error: 'Invalid credentials' });
@@ -89,7 +66,7 @@ app.post('/api/login', async (req, res) => {
 });
 
 // Record game
-app.post('/api/play', (req, res) => {
+app.post('/api/play', async (req, res) => {
   const auth = req.headers.authorization;
   if (!auth) {
     console.warn('[PLAY] Failed - Missing token');
@@ -101,7 +78,7 @@ app.post('/api/play', (req, res) => {
     const decoded = jwt.verify(token, SECRET_KEY);
     const { difficulty, moves } = req.body;
 
-    const user = users.find(u => u.username === decoded.username);
+    const user = await User.findOne({ username: decoded.username });
     if (!user) {
       console.warn(`[PLAY] Failed - User '${decoded.username}' not found`);
       return res.status(404).json({ error: 'User not found' });
@@ -112,18 +89,22 @@ app.post('/api/play', (req, res) => {
       return res.status(400).json({ error: 'Invalid input' });
     }
 
-    if (!user.gamesCompleted.hasOwnProperty(difficulty)) {
+    if (!user.gamesCompleted[difficulty]) {
       console.warn(`[PLAY] Failed - Invalid difficulty '${difficulty}' for user '${decoded.username}'`);
       return res.status(400).json({ error: 'Invalid difficulty level' });
     }
 
-    user.gamesCompleted[difficulty].completed += 1;
-    user.gamesCompleted[difficulty].totalAttempts += moves;
-    user.gamesCompleted[difficulty].bestScore = Math.min(
-      isNaN(user.gamesCompleted[difficulty].bestScore) ? moves : user.gamesCompleted[difficulty].bestScore,
-      moves
-    );
+    const stats = user.gamesCompleted[difficulty];
+    stats.completed = (stats.completed || 0) + 1;
+    stats.totalAttempts = (stats.totalAttempts || 0) + moves;
+    if(stats.bestScore === 0) {
+      stats.bestScore = moves;
+    }
+    else {
+      stats.bestScore = Math.min(stats.bestScore, moves);
+    }
 
+    await user.save();
     console.log(`[PLAY] Success - Username: ${decoded.username}, Difficulty: ${difficulty}, Moves: ${moves}`);
     res.json({ message: `Game recorded for ${difficulty}`, gamesCompleted: user.gamesCompleted });
   } catch (err) {
@@ -133,7 +114,7 @@ app.post('/api/play', (req, res) => {
 });
 
 // User statistics
-app.get('/api/stats', (req, res) => {
+app.get('/api/stats', async (req, res) => {
   const auth = req.headers.authorization;
   if (!auth) {
     console.warn('[STATS] Failed - Missing token');
@@ -144,7 +125,7 @@ app.get('/api/stats', (req, res) => {
     const token = auth.split(' ')[1];
     const decoded = jwt.verify(token, SECRET_KEY);
 
-    const user = users.find(u => u.username === decoded.username);
+    const user = await User.findOne({ username: decoded.username });
     if (!user) {
       console.warn(`[STATS] Failed - User '${decoded.username}' not found`);
       return res.status(404).json({ error: 'User not found' });
