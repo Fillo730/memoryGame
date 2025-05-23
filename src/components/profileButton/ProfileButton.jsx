@@ -1,45 +1,40 @@
 //Libraries
 import { useEffect, useState } from "react";
 
-//utils
-import { getUsername } from "../../utils/loginFunctions";
+//Utils
+import { isLoggedIn as checkIsLoggedIn, getUsername } from "../../utils/loginFunctions";
 
-// CSS Files
+//CSSFiles
 import "./ProfileButton.css";
 
 function ProfileButton() {
-    const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
-    useEffect(() => {
-        if(window.location.pathname === "/profile") {
-            setIsVisible(false);
-        }
-        else {
-            setIsVisible(true);
-        }
-    }, []);
+  useEffect(() => {
+    setIsVisible(window.location.pathname !== "/profile");
+    setLoggedIn(checkIsLoggedIn());
+  }, []);
 
-    function handleClick() {
-        if (!username) {
-            window.location.href = '/login';
-        } else {
-            window.location.href = '/profile';
-        }
+  function handleClick() {
+    if (!loggedIn) {
+      window.location.href = "/login";
+    } else {
+      window.location.href = "/profile";
     }
+  }
 
-    const username = getUsername();
-
-    return (
-        <>
-            {isVisible && (
-                <div className='profile-button-container' onClick={handleClick}>
-                <button className="btn">
-                    {username ? "Hello " + username.toUpperCase() : "You are not logged in"}
-                </button>
-                </div>
-            )}
-        </>
-    );
+  return (
+    <>
+      {isVisible && (
+        <div className="profile-button-container" onClick={handleClick}>
+          <button className="btn">
+            {loggedIn ? "Hello " + getUsername().toUpperCase() : "You are not logged in"}
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
 
 export default ProfileButton;
