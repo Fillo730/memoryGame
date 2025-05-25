@@ -4,12 +4,13 @@ import { useState } from 'react'
 //utils
 import { isLoggedIn } from '../../utils/loginFunctions';
 
+
 //Components
 import { DifficultyCard } from '../../components/ComponentsDependencies';
 import MemoryGame from '../memoryGame/MemoryGame';
 
-//Objects
-import difficulties from '../../utils/difficulties';
+//Constants
+import { difficulties } from '../../utils/difficulties';
 
 function GameHandler() {
   const [isDifficultySelected, setIsDifficultySelected] = useState(false);
@@ -24,6 +25,12 @@ function GameHandler() {
   function handleGoBack() {
     setIsDifficultySelected(false);
     setDifficulty(null);
+  }
+
+  function handleNextDifficulty(level) {
+    setIsDifficultySelected(true);
+    const nextDifficulty = difficulties.find(d => d.level === level);
+    setDifficulty(nextDifficulty);
   }
 
   return (
@@ -61,7 +68,7 @@ function GameHandler() {
               <p className="text">
                 Match the cards and try to remember their positions!<br/>
               </p>
-              <MemoryGame cards={difficulty.cards} name={difficulty.name} handleGoBack={handleGoBack}/>
+              <MemoryGame difficulty={difficulty} handleGoBack={handleGoBack} handleNextDifficulty={handleNextDifficulty}/>
             </>
           )}
         </>

@@ -23,7 +23,13 @@ const defaultImages = [
   "./images/sky.jpg",
   "./images/elephant.jpg",
   "./images/crocodile.jpg",
-  "./images/bird.jpg"
+  "./images/bird.jpg",
+  "./images/fox.jpg",
+  "./images/crab.jpg",
+  "./images/snake.jpg",
+  "./images/dolphin.jpg",
+  "./images/chameleon.jpg",
+  "./images/turtle.jpg",
 ];
 
 export default defaultImages;

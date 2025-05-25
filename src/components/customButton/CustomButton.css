@@ -39,3 +39,17 @@
 .customButton:hover::before {
   width: 250%;
 }
+
+.customButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  color: #888888;
+  outline: 2px solid #888888;
+  box-shadow: none;
+  transform: none;
+}
+
+.customButton:disabled::before {
+  background-color: transparent;
+  width: 0;
+}

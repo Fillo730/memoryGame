@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 //utils
 import { isLoggedIn } from "../../utils/loginFunctions";
+import { getMaxDifficulty } from "../../utils/difficulties";
 
 //Components
 import { CustomButton } from "../../components/ComponentsDependencies";
@@ -16,7 +17,9 @@ import BACKEND_URL from "../../utils/backendEndpoint";
 //CSSFiles
 import './MemoryGame.css';
 
-function MemoryGame({cards, name, handleGoBack}) {
+function MemoryGame({difficulty, handleGoBack, handleNextDifficulty}) {
+    const cards = difficulty.cards;
+    const name = difficulty.name;
     const numPairs = Math.floor(cards / 2);
     const selectedImagesPool = _.sampleSize(defaultImages, numPairs);
     const initialShuffled = _.shuffle([...selectedImagesPool, ...selectedImagesPool]);
@@ -73,6 +76,7 @@ function MemoryGame({cards, name, handleGoBack}) {
     const allImagesMatched = matchedPairs.length === shuffledImages.length;
 
     useEffect(() => {
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         if(!isLoggedIn()) {
             return;
         }
@@ -104,8 +108,10 @@ function MemoryGame({cards, name, handleGoBack}) {
                 <div className="memory-reset">
                     <h2>🎉 Completed in {moves} moves!</h2>
                     <div className="customButton-container">
-                        <CustomButton text={"Play Again"} handleClick={resetGame}/>
-                        <CustomButton text={"Go Back"} handleClick={handleGoBack}/>
+                        <CustomButton text="Next Level" handleClick={() => handleNextDifficulty(difficulty.level + 1)}
+                            disabled={getMaxDifficulty().name === name}/>
+                        <CustomButton text="Play Again" handleClick={resetGame}/>
+                        <CustomButton text="Go Back" handleClick={handleGoBack}/>
                     </div>
                 </div>
             )}

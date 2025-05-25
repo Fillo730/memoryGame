@@ -7,7 +7,7 @@ import { Modal, CustomButton, ProfileDifficultyCard } from "../components/Compon
 // Utils
 import { getUsername, handleLogout } from "../utils/loginFunctions";
 import { checkUsername, checkName } from "../utils/checkPasswordUsername";
-import difficulties from "../utils/difficulties";
+import { difficulties } from "../utils/difficulties";
 
 // Constants
 import BACKEND_URL from "../utils/backendEndpoint";

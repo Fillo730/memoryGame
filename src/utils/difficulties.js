@@ -53,7 +53,11 @@ const difficulties = [
       cards: 50,
       level: 9,
     }
-  ];
+];
+
+function getMaxDifficulty() {
+  return difficulties[difficulties.length - 1];
+}
   
-  export default difficulties;
+export { difficulties, getMaxDifficulty };
   
