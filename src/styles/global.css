@@ -1,5 +1,5 @@
 .light-color {
-    color: #00bcd4;
+    color: #00bcd4 !important;
 }
 
 .warning-color {
@@ -28,6 +28,7 @@
 .big-text {
     font-size: 1.5rem;
     line-height: 1.8;
+    color: #cccccc;
 }
 
 .normal-max-width {

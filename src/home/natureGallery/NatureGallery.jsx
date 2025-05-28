@@ -34,6 +34,9 @@ function NatureGallery() {
                     ))
                 }
             </div>
+            <p className='big-text'>
+                Total different pictures in the gallery: <label className='light-color'>{defaultImages.length}</label>
+            </p>
             <CustomButton text={"See more"} handleClick={handleClick} />
         </>
   )

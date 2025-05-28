@@ -104,6 +104,11 @@ function MemoryGame({difficulty, handleGoBack, handleNextDifficulty}) {
                     </li>
                 ))}
             </ul>
+            {!allImagesMatched && 
+                <p className='big-text'>
+                    Current attempts: <label className='light-color'>{moves}</label>
+                </p>
+                }
             {allImagesMatched && (
                 <div className="memory-reset">
                     <h2>🎉 Completed in {moves} moves!</h2>
